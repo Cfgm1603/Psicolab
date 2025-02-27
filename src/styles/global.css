@@ -1,1 +1,22 @@
 @import "tailwindcss";
+@layer base {
+  :root {
+    --pantone-281: 0, 32, 96;
+    --pantone-320: 0, 128, 128;
+    --pantone-123: 255, 192, 0;
+    --neutral-light: 243, 238, 234;
+  }
+
+  .bg-pantone-281 {
+    background-color: rgb(var(--pantone-281));
+  }
+  .bg-pantone-320 {
+    background-color: rgb(var(--pantone-320));
+  }
+  .bg-pantone-123 {
+    background-color: rgb(var(--pantone-123));
+  }
+  .bg-neutral-light {
+    background-color: rgb(var(--neutral-light));
+  }
+}
