@@ -20,3 +20,12 @@
     background-color: rgb(var(--neutral-light));
   }
 }
+@layer utilities {
+  .text-pantone-281 {
+    color: rgb(var(--pantone-281));
+  }
+}
+
+body {
+  width: 100%;
+}

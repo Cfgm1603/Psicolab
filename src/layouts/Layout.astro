@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import Navbar from "../components/Navbar.astro";
 ---
 
 <!doctype html>
@@ -15,10 +16,13 @@ import "../styles/global.css";
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <title>Astro Basics</title>
+    <title>PsicoLab</title>
   </head>
   <body>
-    <slot />
+    <Navbar />
+    <div class="py-8 max-w-5xl mx-auto px-8 xl:px-0">
+      <slot />
+    </div>
   </body>
 </html>
 
