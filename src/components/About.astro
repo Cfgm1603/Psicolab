@@ -1,23 +1,14 @@
 ---
-// PsicoLab - Sobre Nosotros Page
+import Banner from "./Banner.astro";
+import VisionMisionValores from "./VisionMisionValores.astro";
 ---
 
 <div class="font-sans bg-white">
-  <!-- Hero Section with Medical Staff Background -->
-  <div class="relative h-64 md:h-80 bg-gray-200 overflow-hidden rounded-lg">
-    <img
-      src="/src/assets/img/AboutUsFondoInicial.jpg"
-      alt="Medical professionals"
-      class="absolute inset-0 w-full h-full object-cover filter brightness-75"
-    />
-    <div class="absolute inset-0 flex items-center justify-center">
-      <h1
-        class="text-4xl md:text-5xl font-bold text-white text-center tracking-wide"
-      >
-        SOBRE NOSOTROS
-      </h1>
-    </div>
-  </div>
+  <Banner
+    title="Conoce más sobre nosotros"
+    imageSrc="/src/assets/img/AboutUsFondoInicial.jpg"
+    imageAlt="Conoce más sobre nosotros"
+  />
 
   <!-- Two Column Section -->
   <div class="max-w-7xl mx-auto my-8">
@@ -76,9 +67,7 @@
       </div>
 
       <!-- Right Column - Doctor Image with Experience Badge -->
-      <div
-        class="w-full md:w-1/2 bg-gray-700 rounded-lg relative"
-      >
+      <div class="w-full md:w-1/2 bg-gray-700 rounded-lg relative">
         <img
           src="/src/assets/img/MedicoPensando.jpg"
           alt="Healthcare professional with clipboard"
@@ -95,4 +84,63 @@
       </div>
     </div>
   </div>
+</div>
+<div id="container" class="max-w-7xl mx-auto pt-8">
+  <section class="px-4 py-12 bg-white">
+    <div class="flex flex-col md:flex-row gap-6 items-center">
+      <div class="md:w-1/2">
+        <div class="relative bg-pantone-320 rounded-3xl">
+          <div class="w-full max-w-md">
+            <img
+              src="/src/assets/img/image.webp"
+              alt="Foto Fundadora"
+              class="w-full rounded-3xl transform -translate-x-3 -translate-y-3"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="md:w-1/2">
+        <h1 class="text-pantone-281 text-4xl font-extrabold mb-6">
+          Estamos liderados por nuestra fundadora
+        </h1>
+        <p class="text-lg text-gray-800 leading-relaxed">
+          Una Psicóloga Especialista en Seguridad y Salud en el Trabajo, con más
+          de 10 años de experiencia en el ámbito psicosocial desde la etapa
+          inicial de la identificación del riesgo, pasando por la medición del
+          mismo a través del instrumento creado por el ministerio de trabajo con
+          la universidad javeriana de colombia, mejor conocido como “batería de
+          riesgo psicosocial” y proyectando medidas de intervención o prevención
+          acordes a las necesidades puntuales de cada empresa.
+        </p>
+        <br />
+        <p class="text-lg text-gray-800 leading-relaxed">
+          Nuestros conocimientos y trayectoria nos permiten ofrecer soluciones
+          efectivas que promuevan entornos laborales saludables y productivos
+        </p>
+      </div>
+    </div>
+  </section>
+</div>
+<div id="container" class="max-w-7xl mx-auto pt-8">
+  <section class="px-4 py-12 bg-white">
+    <div class="flex flex-col md:flex-row gap-6 items-center">
+      <div class="md:w-1/2">
+        <h1 class="text-pantone-281 text-3xl font-extrabold mb-6">
+          En Psicolab, acompañamos a nuestras empresas aliadas
+        </h1>
+      </div>
+      <div class="md:w-1/2">
+        <div class="relative bg-pantone-123 rounded-3xl">
+          <div class="w-full max-w-md">
+            <img
+              src="/src/assets/img/Horizontal.jpeg"
+              alt="Foto Fundadora"
+              class="w-full rounded-3xl transform -translate-x-3 -translate-y-3"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <VisionMisionValores />
 </div>

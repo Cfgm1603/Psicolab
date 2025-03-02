@@ -1,0 +1,79 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  imageSrc: string;
+  imageAlt: string;
+}
+
+const { title, description, imageSrc, imageAlt } = Astro.props;
+---
+
+<div class="expanding-card bg-gray-50 rounded-lg overflow-hidden shadow-md">
+  <div class="card-content">
+    <div class="h-48 overflow-hidden">
+      <img
+        src={imageSrc || "/placeholder.svg"}
+        alt={imageAlt}
+        class="w-full h-full object-cover"
+      />
+    </div>
+    <div class="p-5">
+      <h2 class="text-xl font-bold text-[#0a2463] mb-3">
+        {title}
+      </h2>
+      <div class="description-container">
+        <p class="text-gray-700 description">
+          {description}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .expanding-card {
+    height: 288px; /* Altura fija para la imagen (192px) + padding (40px) + título */
+    transition: height 0.3s ease-in-out;
+  }
+
+  .expanding-card.expanded {
+    height: auto;
+  }
+
+  .card-content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .description-container {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+  }
+
+  .expanding-card.expanded .description-container {
+    max-height: 500px; /* Ajusta este valor según la longitud máxima esperada del texto */
+  }
+
+  .description {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .expanding-card.expanded .description {
+    opacity: 1;
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const cards = document.querySelectorAll(".expanding-card");
+    cards.forEach((card) => {
+      card.addEventListener("mouseenter", () => {
+        card.classList.add("expanded");
+      });
+    });
+  });
+</script>
