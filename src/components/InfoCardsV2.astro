@@ -1,0 +1,144 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  imageSrc: string;
+  imageAlt: string;
+}
+
+const { title, description, imageSrc, imageAlt } = Astro.props;
+---
+
+<div class="expanding-card bg-white rounded-3xl overflow-hidden shadow-md">
+  <div class="card-content px-4 py-2">
+    <div class="px-3 py-2">
+      <h2 class="text-xl md:text-2xl font-bold text-[#061d56] truncate">
+        {title}
+      </h2>
+    </div>
+    <div class="overflow-hidden rounded-3xl">
+      <img
+        src={imageSrc || "/placeholder.svg"}
+        alt={imageAlt}
+        class="w-full h-[120px] md:h-[150px] object-cover"
+      />
+    </div>
+    <div class="expand-indicator">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        class="w-6 h-6"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M12.53 16.28a.75.75 0 01-1.06 0l-6-6a.75.75 0 011.06-1.06L12 14.69l5.47-5.47a.75.75 0 111.06 1.06l-6 6z"
+          clip-rule="evenodd"></path>
+      </svg>
+    </div>
+    <div class="description-container bg-white">
+      <div class="">
+        <p
+          class="text-base md:text-lg text-gray-700 description leading-relaxed"
+        >
+          {description}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .expanding-card {
+    height: 220px; /* Altura fija para mobile */
+    transition: height 0.3s ease-in-out;
+    margin-bottom: 1rem;
+    position: relative;
+  }
+
+  @media (min-width: 768px) {
+    .expanding-card {
+      height: 250px; /* Altura para pantallas más grandes */
+    }
+  }
+
+  .expanding-card.expanded {
+    height: auto;
+    .expand-indicator {
+      display: none;
+    }
+    .description-container {
+      padding: 1rem;
+    }
+  }
+
+  .card-content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .expand-indicator {
+    display: flex;
+    justify-content: center;
+    color: #061d56;
+    opacity: 0.7;
+    margin-top: 0.5rem;
+  }
+
+  .description-container {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+  }
+
+  .expanding-card.expanded .description-container {
+    max-height: 500px;
+  }
+
+  .description {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .expanding-card.expanded .description {
+    opacity: 1;
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const cards = document.querySelectorAll(".expanding-card");
+
+    cards.forEach((card) => {
+      // Evento para desktop (hover)
+      card.addEventListener("mouseenter", () => {
+        card.classList.add("expanded");
+      });
+
+      // Eliminar el evento mouseleave para que la tarjeta permanezca expandida
+
+      // Evento para dispositivos táctiles (tap/touch)
+      card.addEventListener("click", () => {
+        // Si ya está expandida, no hacemos nada (para mantenerla expandida)
+        if (!card.classList.contains("expanded")) {
+          card.classList.add("expanded");
+        }
+      });
+
+      // Soporte para dispositivos táctiles
+      card.addEventListener(
+        "touchstart",
+        (e) => {
+          if (window.matchMedia("(pointer: coarse)").matches) {
+            e.preventDefault();
+            if (!card.classList.contains("expanded")) {
+              card.classList.add("expanded");
+            }
+          }
+        },
+        { passive: false }
+      );
+    });
+  });
+</script>

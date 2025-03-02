@@ -1,0 +1,92 @@
+---
+// src/components/Services.astro
+import Banner from "./Banner.astro";
+import InfoCardsV2 from "./InfoCardsV2.astro";
+const defaultImage = "/src/assets/img/AboutUsFondoInicial.jpg";
+
+const services = [
+  {
+    title: "Medición de riesgo psicosocial",
+    description:
+      "Aplicamos las herramientas establecidas en la Resolución 2646 de 2008 y la Resolución 2404 de 2019 para evaluar los factores de riesgo psicosocial en tu organización, ofreciendo informes detallados y plan de intervención para su gestión.",
+  },
+  {
+    title: "Análisis de puestos de trabajo",
+    description:
+      "Evaluamos cada posición laboral para identificar riesgos asociados y garantizar que las condiciones de trabajo sean seguras, eficientes y acordes con las capacidades de los colaboradores.",
+  },
+  {
+    title: "Diseño y asesoría en Sistema de Vigilancia Epidemiológica",
+    description:
+      "Creamos y asesoramos en la implementación de sistemas de vigilancia epidemiológica enfocados en el monitoreo y control de riesgos psicosociales.",
+  },
+  {
+    title:
+      "Asesoría e implementación de protocolos para la gestión de riesgo psicosocial.",
+    description:
+      "Guiamos a tu empresa en la creación, adaptación y ejecución de protocolos para gestionar eficazmente los riesgos psicosociales, asegurando el cumplimiento de normativas y el bienestar de los colaboradores.",
+  },
+  {
+    title: "Capacitaciones",
+    description:
+      "Desarrollamos capacitaciones dinámicas en base a las necesidades de tu empresa buscando fortalecer los conocimientos en seguridad y salud en el trabajo de los colaboradores.",
+  },
+  {
+    title: "Talleres Ludicos",
+    description:
+      "Ofrecemos talleres prácticos y creativos diseñados para promover el bienestar emocional y fortalecer la integración de los equipos de trabajo. Actividades como mindfulness, manejo del estrés, gestión de emociones, dinámicas grupales, pintura y rallys. Se adaptan a las necesidades de cada empresa, brindando herramientas efectivas para construir un ambiente laboral saludable y motivador.",
+  },
+  {
+    title: "Acoso Laboral y Comité de Convivencia",
+    description:
+      "Brindamos asesoría especializada en: Prevención del acoso laboral y promoción de un ambiente laboral sano. Conformación y funcionamiento del comité de convivencia. Diseño de estrategias para mejorar las relaciones interpersonales dentro de la organización",
+  },
+  {
+    title: "Clima Laboral",
+    description:
+      "Realizamos diagnósticos detallados para evaluar el clima laboral y detectar oportunidades de mejora, promoviendo un entorno de trabajo más saludable, motivador y productivo.",
+  },
+  {
+    title: "Creación de Planes de Bienestar Laboral Personalizados",
+    description:
+      "Diseñamos estrategias adaptadas a las necesidades de cada organización, enfocadas en mejorar la calidad de vida de los colaboradores y potenciar su compromiso y rendimiento.",
+  },
+  {
+    title: "Programa de Pausas Activas Adaptado a tu Organización",
+    description:
+      "Implementamos programas de pausas activas diseñados según las características de tu equipo, promoviendo la salud física y mental de los colaboradores y reduciendo el riesgo de lesiones laborales.",
+  },
+  {
+    title:
+      "Diseño, Implementación y Asesoría del Sistema de Gestión en Seguridad y Salud en el Trabajo (SG-SST)",
+    description:
+      "Ofrecemos soluciones integrales para cumplir con la normatividad vigente, diseñando e implementando un SG-SST eficaz, ajustado a las necesidades de tu empresa y demás actividades que promuevan la prevención de riesgos laborales.",
+  },
+];
+---
+
+<Banner
+  title="Conoce nuestros servicios"
+  imageSrc={defaultImage}
+  imageAlt="Conoce nuestros servicios"
+/>
+
+<div class="max-w-7xl mx-auto py-12">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+    {
+      services.map((service, index) => {
+        const isLastCard = index === services.length - 1;
+        return (
+          <div class={isLastCard ? "md:col-span-2" : ""}>
+            <InfoCardsV2
+              title={service.title}
+              imageSrc={defaultImage}
+              imageAlt={service.title}
+              description={service.description}
+            />
+          </div>
+        );
+      })
+    }
+  </div>
+</div>

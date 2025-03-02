@@ -1,19 +1,23 @@
 ---
+import { Image } from "astro:assets";
+
 interface Props {
   title: string;
   imageSrc: string;
   imageAlt: string;
 }
-
 const { title, imageSrc, imageAlt } = Astro.props;
+const image = import(`${imageSrc}`);
 ---
 
 <div class="relative h-64 md:h-80 bg-gray-200 overflow-hidden rounded-lg">
-  <img
-    src={imageSrc}
+  <Image
+    src={image}
     alt={imageAlt}
     class="absolute inset-0 w-full h-full object-cover filter brightness-75"
+    loading="lazy"
   />
+
   <div class="absolute inset-0 flex items-center justify-center">
     <h1
       class="text-4xl md:text-5xl font-bold text-white text-center tracking-wide"
