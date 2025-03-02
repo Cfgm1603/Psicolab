@@ -12,7 +12,9 @@ const { title, description, imageSrc, imageAlt } = Astro.props;
 <div class="expanding-card bg-white rounded-3xl overflow-hidden shadow-md">
   <div class="card-content px-4 py-2">
     <div class="px-3 py-2">
-      <h2 class="text-xl md:text-2xl font-bold text-[#061d56] truncate">
+      <h2
+        class="text-xl md:text-2xl font-bold text-[#061d56] line-clamp-2 md:line-clamp-2"
+      >
         {title}
       </h2>
     </div>
@@ -37,7 +39,7 @@ const { title, description, imageSrc, imageAlt } = Astro.props;
       </svg>
     </div>
     <div class="description-container bg-white">
-      <div class="">
+      <div class="p-1 md:p-2">
         <p
           class="text-base md:text-lg text-gray-700 description leading-relaxed"
         >
@@ -50,26 +52,23 @@ const { title, description, imageSrc, imageAlt } = Astro.props;
 
 <style>
   .expanding-card {
-    height: 220px; /* Altura fija para mobile */
-    transition: height 0.3s ease-in-out;
+    height: auto; /* Permitir altura automática inicial */
+    min-height: 220px; /* Altura mínima para mobile */
+    max-height: 300px; /* Altura máxima inicial */
+    transition: max-height 0.3s ease-in-out;
     margin-bottom: 1rem;
     position: relative;
   }
 
   @media (min-width: 768px) {
     .expanding-card {
-      height: 250px; /* Altura para pantallas más grandes */
+      min-height: 250px; /* Altura mínima para pantallas más grandes */
+      max-height: 320px; /* Altura máxima inicial para desktop */
     }
   }
 
   .expanding-card.expanded {
-    height: auto;
-    .expand-indicator {
-      display: none;
-    }
-    .description-container {
-      padding: 1rem;
-    }
+    max-height: 2000px; /* Valor alto para permitir cualquier contenido */
   }
 
   .card-content {
@@ -84,6 +83,15 @@ const { title, description, imageSrc, imageAlt } = Astro.props;
     color: #061d56;
     opacity: 0.7;
     margin-top: 0.5rem;
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease;
+  }
+
+  .expanding-card.expanded .expand-indicator {
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none;
   }
 
   .description-container {
@@ -93,7 +101,7 @@ const { title, description, imageSrc, imageAlt } = Astro.props;
   }
 
   .expanding-card.expanded .description-container {
-    max-height: 500px;
+    max-height: 1000px;
   }
 
   .description {
@@ -110,13 +118,36 @@ const { title, description, imageSrc, imageAlt } = Astro.props;
   document.addEventListener("DOMContentLoaded", () => {
     const cards = document.querySelectorAll(".expanding-card");
 
+    // Ajustar altura inicial según contenido del título
+    cards.forEach((card) => {
+      const titleElement = card.querySelector("h2");
+      const imageElement = card.querySelector("img");
+
+      // Detectar si el título ocupa más de una línea y ajustar altura
+      function adjustCardHeight() {
+        const titleHeight = titleElement.offsetHeight;
+        const standardTitleHeight = 32; // Altura aproximada de una línea de título
+
+        if (titleHeight > standardTitleHeight) {
+          // Ajustar la altura de la tarjeta según necesidad
+          const extraHeight = titleHeight - standardTitleHeight;
+          card.style.minHeight = `calc(${card.offsetHeight}px + ${extraHeight}px)`;
+        }
+      }
+
+      // Ejecutar después de que las imágenes se carguen
+      if (imageElement.complete) {
+        adjustCardHeight();
+      } else {
+        imageElement.onload = adjustCardHeight;
+      }
+    });
+
     cards.forEach((card) => {
       // Evento para desktop (hover)
       card.addEventListener("mouseenter", () => {
         card.classList.add("expanded");
       });
-
-      // Eliminar el evento mouseleave para que la tarjeta permanezca expandida
 
       // Evento para dispositivos táctiles (tap/touch)
       card.addEventListener("click", () => {
