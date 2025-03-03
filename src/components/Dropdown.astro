@@ -1,0 +1,99 @@
+---
+export interface Props {
+  question: string;
+  answer: string;
+  isOpen?: boolean;
+}
+
+const { question, answer, isOpen = false } = Astro.props;
+---
+
+<div class="dropdown mb-4 rounded-lg shadow-md bg-white overflow-hidden">
+  <button
+    class="dropdown-toggle w-full flex items-center justify-between p-5 text-left"
+    aria-expanded={isOpen ? "true" : "false"}
+  >
+    <h3 class="text-xl md:text-2xl font-bold text-[#0a2463]">{question}</h3>
+    <span
+      class="toggle-icon text-[#0a2463] w-8 h-8 flex items-center justify-center rounded-full border-2 border-[#0a2463] transition-transform duration-300"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="2.5"
+        stroke="currentColor"
+        class="w-5 h-5 minus-icon transition-opacity duration-300"
+        style={isOpen ? "opacity: 1" : "opacity: 0; position: absolute;"}
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15"
+        ></path>
+      </svg>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="2.5"
+        stroke="currentColor"
+        class="w-5 h-5 plus-icon transition-opacity duration-300"
+        style={isOpen ? "opacity: 0; position: absolute;" : "opacity: 1"}
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M12 4.5v15m7.5-7.5h-15"></path>
+      </svg>
+    </span>
+  </button>
+  <div
+    class="dropdown-content overflow-hidden transition-all duration-500 ease-in-out"
+    style={`max-height: ${isOpen ? "1000px" : "0"}; opacity: ${isOpen ? "1" : "0"};`}
+  >
+    <div class="p-5 pt-0 text-base">
+      <p>{answer}</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Ejecutar después de que el DOM esté cargado
+  document.addEventListener("DOMContentLoaded", () => {
+    const dropdowns = document.querySelectorAll(".dropdown");
+
+    dropdowns.forEach((dropdown) => {
+      const toggle = dropdown.querySelector(".dropdown-toggle");
+      const content = dropdown.querySelector(".dropdown-content");
+      const minusIcon = dropdown.querySelector(".minus-icon");
+      const plusIcon = dropdown.querySelector(".plus-icon");
+
+      toggle?.addEventListener("click", () => {
+        const expanded = toggle.getAttribute("aria-expanded") === "true";
+
+        // Cambiar el estado
+        toggle.setAttribute("aria-expanded", expanded ? "false" : "true");
+
+        // Animar el contenido
+        if (content) {
+          if (expanded) {
+            content.style.maxHeight = "0";
+            content.style.opacity = "0";
+          } else {
+            content.style.maxHeight = "1000px";
+            content.style.opacity = "1";
+          }
+        }
+
+        // Animar los iconos
+        if (minusIcon && plusIcon) {
+          if (expanded) {
+            minusIcon.style.opacity = "0";
+            plusIcon.style.opacity = "1";
+          } else {
+            minusIcon.style.opacity = "1";
+            plusIcon.style.opacity = "0";
+          }
+        }
+      });
+    });
+  });
+</script>

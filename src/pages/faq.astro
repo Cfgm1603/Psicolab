@@ -1,5 +1,14 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import FaqC from "../components/FaqC.astro";
+import Banner from "../components/Banner.astro";
 ---
 
-<Layout />
+<Layout>
+  <Banner
+    title="Preguntas frecuentes"
+    imageSrc="/src/assets/img/AboutUsFondoInicial.jpg"
+    imageAlt="Preguntas frecuentes"
+  />
+  <FaqC />
+</Layout>

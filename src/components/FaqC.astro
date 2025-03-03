@@ -1,0 +1,86 @@
+---
+import Dropdown from "./Dropdown.astro";
+
+// Datos de preguntas y respuestas
+const faqs = [
+  {
+    question:
+      "¿Que empresas deben cumplir con la medición de riesgo psicosocial?",
+    answer:
+      "Según la normatividad se debe realizar a todos los empleadores públicos y privados, a los trabajadores dependientes e independientes, a los contratantes de personal bajo modalidad de contrato civil, comercial o administrativo, a las organizaciones de economía solidaria y del sector cooperativo, a las agremiaciones o asociaciones que afilian trabajadores independientes al Sistema de Seguridad Social integral; a las administradoras de riesgos profesionales; a la Policía en lo que corresponde a su personal no uniformado y al personal civil de las Fuerzas Militares",
+  },
+  {
+    question: "¿Que perfil deben tener la persona que realiza la medición?",
+    answer:
+      "Debe ser un psicolog@ con especialización en seguridad y salud en el trabajo con licencia vigente.",
+  },
+  {
+    question:
+      "¿Que pasa si mi empresa no realiza la medición de riesgo psicosocial?",
+    answer:
+      "No realizar la medición de los riesgos psicosociales puede tener consecuencias negativas para la empresa, incluyendo la falta de cumplimiento con las normativas legales y sanciones económicas, además del deterioro del clima laboral, aumento de enfermedades laborales relacionadas con el estrés y la ansiedad, y una disminución en la productividad de los empleados.",
+  },
+  {
+    question:
+      "¿Quienes deben contar con el programa de vigilancia epidemiológica?",
+    answer:
+      "Deben ser las empresas que identificaron factores con riesgo alto según su evaluación, pero se recomienda implementarlo como medida de prevención para evitar que se generen efectos negativos en la salud física o mental de los trabajadores.",
+  },
+  {
+    question: "¿Cuáles protocolos tengo que implementar en mi empresa?",
+    answer:
+      "Según el sector económico en el que se encuentra la empresa y los resultados de la medición arrojados, se establecen las acciones que se deben implementar.",
+  },
+  {
+    question: "¿Cuánto tiempo tarda el proceso de medición?",
+    answer:
+      "El tiempo depende del número de empleados que participen en la medición y el cronograma acordado con la empresa. Por lo general, puede llevar entre una a dos semanas, incluyendo la aplicación de los cuestionarios y la elaboración del informe.",
+  },
+  {
+    question: "¿Quién debe participar en la medición de riesgos psicosociales?",
+    answer:
+      "Los trabajadores de todas las áreas de la empresa pueden participar, dependiendo de la población definida por la empresa contratante. Se pueden realizar evaluaciones por grupos ocupacionales o áreas específicas.",
+  },
+  {
+    question: "¿Las baterías de riesgo psicosocial son anónimas?",
+    answer:
+      "Sí, las respuestas son totalmente confidenciales y anónimas para garantizar que los trabajadores respondan con sinceridad sin temor a represalias.",
+  },
+  {
+    question: "¿Cómo se garantiza la confidencialidad de los resultados?",
+    answer:
+      "La información recolectada se procesa de manera agrupada y sin identificar a empleados individuales. Solo se entregan informes generales con datos consolidados.",
+  },
+  {
+    question:
+      "¿Qué relación tienen las baterías de riesgo psicosocial con el SG-SST?",
+    answer:
+      "La evaluación de los riesgos psicosociales es un requisito dentro del Sistema de Gestión en Seguridad y Salud en el Trabajo (SG-SST), ya que permite identificar y gestionar los factores que pueden afectar la salud mental de los empleados.",
+  },
+  {
+    question:
+      "¿Ofrecen otros servicios además de la medición de riesgos psicosociales?",
+    answer:
+      "Sí, en Psicolab ofrecemos una amplia gama de servicios en Seguridad y Salud en el Trabajo, como capacitaciones en manejo del estrés, diseño de programas de bienestar, asesoría en el cumplimiento del SG-SST, y planes de intervención para mejorar el ambiente laboral.",
+  },
+  {
+    question: "¿Cuánto cuesta realizar la medición de riesgo psicosocial?",
+    answer:
+      "Depende de cada empresa, solicita tú cotización y realizaremos una basada en tus necesidades.",
+  },
+];
+---
+
+<section class="faq-section py-8">
+  <div class="faq-container">
+    {
+      faqs.map((faq, index) => (
+        <Dropdown
+          question={faq.question}
+          answer={faq.answer}
+          isOpen={index === 0}
+        />
+      ))
+    }
+  </div>
+</section>
