@@ -1,10 +1,16 @@
 ---
 import "../styles/global.css";
 import Navbar from "../components/Navbar.astro";
+
+interface Props {
+  title?: string;
+}
+
+const { title = "PsicoLab" } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -16,15 +22,15 @@ import Navbar from "../components/Navbar.astro";
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <title>PsicoLab</title>
+    <title>{title}</title>
   </head>
-  <body>
+  <body class="overflow-x-hidden">
     <Navbar />
-    <div class="mt-16">
-      <div class="py-8 max-w-5xl mx-auto px-8 xl:px-0">
+    <main>
+      <div class="mt-16">
         <slot />
       </div>
-    </div>
+    </main>
   </body>
 </html>
 

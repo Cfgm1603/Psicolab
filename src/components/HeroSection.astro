@@ -1,0 +1,71 @@
+---
+import "aos/dist/aos.css";
+---
+
+<script>
+  import AOS from "aos";
+  AOS.init();
+</script>
+
+<section class="relative w-full max-w-7xl mx-auto">
+  <div class="flex flex-col md:flex-row items-center">
+    <div class="w-full md:w-1/2 z-10" data-aos="fade-right">
+      <h1
+        class="text-3xl md:text-4xl lg:text-5xl font-bold text-navy-900 leading-none"
+      >
+        Cuidamos tu equipo, fortalecemos tu empresa
+      </h1>
+      <p class="mt-4 text-lg md:text-md text-gray-800 max-w-xl">
+        Ayudamos a las organizaciones a mejorar el bienestar laboral y cumplir
+        con la normativa en seguridad y salud en el trabajo.
+      </p>
+      <a
+        href="/contacto"
+        class="mt-8 inline-block bg-navy-900 text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-navy-800 transition-colors"
+      >
+        Contacto
+      </a>
+    </div>
+
+    <img
+      src="/src/assets/img/FotoPrincipal.webp"
+      alt="Teamwork"
+      class="w-full h-full md:w-1/2 mt-12 md:mt-0 relative flex justify-center"
+      data-aos="fade-left"
+    />
+  </div>
+
+  <div
+    class="bg-navy-900 text-white mt-8 md:-mt-16 p-6 md:p-10 rounded-lg z-0 relative"
+  >
+    <p class="text-lg md:text-xl font-medium">
+      En Psicolab, estamos convencidos de que <span class="font-bold"
+        >el recurso más valioso de cualquier organización son las personas.</span
+      > Creemos que los entornos laborales deben promover un desarrollo personal
+      saludable, que no solo beneficie a los colaboradores, <span
+        class="font-bold"
+        >sino que también impulse el crecimiento sostenible de las empresas.</span
+      >
+    </p>
+  </div>
+</section>
+
+<style>
+  /* Custom colors to match design */
+  :root {
+    --navy-900: #0a215a;
+    --navy-800: #142d73;
+  }
+
+  .bg-navy-900 {
+    background-color: var(--navy-900);
+  }
+
+  .bg-navy-800 {
+    background-color: var(--navy-800);
+  }
+
+  .text-navy-900 {
+    color: var(--navy-900);
+  }
+</style>

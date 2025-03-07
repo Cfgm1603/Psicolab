@@ -9,6 +9,7 @@ export const theme = {
     "pantone-123": "#FFC000",
     "neutral-light": "#F3EEEA",
 
+    lightblue: "#F4F6FC",
     transparent: "transparent",
     current: "currentColor",
     white: "#ffffff",

@@ -1,0 +1,79 @@
+---
+import "aos/dist/aos.css";
+---
+
+<!-- Two Column Section -->
+<div class="max-w-7xl mx-auto my-8">
+  <div class="flex flex-col md:flex-row md:space-x-6">
+    <!-- Left Column - Blue Box with Text -->
+    <div class="w-full md:w-1/2 mb-6 md:mb-0">
+      <div
+        class="bg-pantone-281 text-white p-8 md:p-10 rounded-lg relative overflow-hidden h-full"
+      >
+        <!-- Colombian Flag Diagonal Stripes -->
+        <div
+          class="absolute top-0 right-0 w-[150px] h-[150px] overflow-hidden pointer-events-none"
+        >
+          <div
+            class="absolute top-0 right-0 w-[10px] h-[300px] bg-red-600"
+            style="transform: rotate(-45deg) translateX(35px) translateY(-120px);"
+          >
+          </div>
+          <div
+            class="absolute top-0 right-0 w-[10px] h-[300px] bg-blue-900"
+            style="transform: rotate(-45deg) translateX(45px) translateY(-120px);"
+          >
+          </div>
+          <div
+            class="absolute top-0 right-0 w-[15px] h-[300px] bg-yellow-400"
+            style="transform: rotate(-45deg) translateX(56px) translateY(-120px);"
+          >
+          </div>
+        </div>
+
+        <!-- Content -->
+        <div class="relative z-10 max-w-xl" data-aos="fade-right">
+          <h2
+            class="text-1xl w-full md:text-2xl font-bold leading-tight mb-6 md:mb-8"
+          >
+            Somos un equipo de profesionales boyacenses comprometidos con el
+            bienestar laboral
+          </h2>
+
+          <p class="text-lg md:text-xl">
+            <span class="font-semibold"
+              >Creemos firmemente en el potencial de las empresas de nuestra
+              región</span
+            > y es por esto que trabajamos para fortalecerlas mediante soluciones
+            innovadoras que aporten a la mejora continua y al crecimiento tanto personal
+            como laboral.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column - Doctor Image with Experience Badge -->
+    <div class="w-full md:w-1/2 bg-gray-700 rounded-lg relative">
+      <img
+        src="/src/assets/img/MedicoPensando.jpg"
+        alt="Healthcare professional with clipboard"
+        class="w-full h-full object-cover rounded-lg"
+      />
+      <div
+        class="absolute top-8 left-[-10px] bg-pantone-320 text-white px-6 py-3 rounded-lg text-2xl font-bold align-baseline"
+        data-aos="fade-left"
+        data-aos-duration="1000"
+        data-aos-anchor-placement="top-center"
+      >
+        +10 años de experiencia
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  import AOS from "aos";
+  AOS.init({
+    duration: 1000,
+  });
+</script>

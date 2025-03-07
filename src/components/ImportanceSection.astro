@@ -1,0 +1,85 @@
+---
+import InfoCard from "./InfoCards.astro";
+
+const infoCards = [
+  {
+    title: "Identificar factores de riesgo",
+    description:
+      "Saber qué aspectos del entorno laboral pueden estar afectando la salud física y mental y el desempeño de los trabajadores.",
+    imageSrc: "/src/assets/img/L1.webp",
+    imageAlt:
+      "Persona caminando en cuerda floja representando riesgos laborales",
+  },
+  {
+    title: "Cumplir con la normativa",
+    description:
+      "Es una obligación legal para las empresas realizar esta evaluación y gestionar los riesgos asociados.",
+    imageSrc: "/src/assets/img/L2.webp",
+    imageAlt: "Personas con chalecos de seguridad revisando documentos",
+  },
+  {
+    title: "Promover el bienestar",
+    description:
+      "Implementar medidas que contribuyan a un ambiente laboral saludable y motivador.",
+    imageSrc: "/src/assets/img/L3.webp",
+    imageAlt: "Reunión profesional en una oficina",
+  },
+  {
+    title: "Aumentar la productividad",
+    description:
+      "Un entorno equilibrado fomenta el compromiso y el rendimiento de los colaboradores.",
+    imageSrc: "/src/assets/img/L4.webp",
+    imageAlt: "Personas analizando gráficos en una tablet",
+  },
+  {
+    title: "Evitar sanciones legales",
+    description:
+      "Cumplir con la normativa evita posibles multas o problemas legales para la organización.",
+    imageSrc: "/src/assets/img/L2.webp",
+    imageAlt: "Mazo de juez y balanza de justicia",
+  },
+];
+---
+
+<div class="bg-white pt-25">
+  <div class="text-left">
+    <h1 class="text-4xl md:text-5xl font-bold text-[#0a2463] mb-4 text-left">
+      ¿Por qué es importante medirlos?
+    </h1>
+
+    <p class="text-lg text-gray-800 mb-10 max-w-4xl text-left">
+      La medición de los riesgos psicosociales mediante las baterías diseñadas
+      por el Ministerio de Salud (Resolución 2404 de 2019) es fundamental para:
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+    {
+      infoCards
+        .slice(0, 3)
+        .map((card) => (
+          <InfoCard
+            title={card.title}
+            description={card.description}
+            imageSrc={card.imageSrc}
+            imageAlt={card.imageAlt}
+          />
+        ))
+    }
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    {
+      infoCards
+        .slice(3)
+        .map((card) => (
+          <InfoCard
+            title={card.title}
+            description={card.description}
+            imageSrc={card.imageSrc}
+            imageAlt={card.imageAlt}
+          />
+        ))
+    }
+  </div>
+</div>

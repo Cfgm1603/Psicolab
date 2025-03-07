@@ -52,10 +52,10 @@ const { title, description, imageSrc, imageAlt } = Astro.props;
 
 <style>
   .expanding-card {
-    height: auto; /* Permitir altura automática inicial */
-    min-height: 220px; /* Altura mínima para mobile */
-    max-height: 300px; /* Altura máxima inicial */
-    transition: max-height 0.3s ease-in-out;
+    height: auto;
+    min-height: 220px;
+    max-height: 300px;
+    transition: max-height 1s ease-in-out; /* Changed duration to 1s */
     margin-bottom: 1rem;
     position: relative;
   }
@@ -84,8 +84,8 @@ const { title, description, imageSrc, imageAlt } = Astro.props;
     opacity: 0.7;
     margin-top: 0.5rem;
     transition:
-      opacity 0.3s ease,
-      transform 0.3s ease;
+      opacity 0.8s ease-in-out,
+      transform 0.8s ease-in-out;
   }
 
   .expanding-card.expanded .expand-indicator {
@@ -97,7 +97,7 @@ const { title, description, imageSrc, imageAlt } = Astro.props;
   .description-container {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease-in-out;
+    transition: max-height 0.8s ease-in-out;
   }
 
   .expanding-card.expanded .description-container {
@@ -106,7 +106,7 @@ const { title, description, imageSrc, imageAlt } = Astro.props;
 
   .description {
     opacity: 0;
-    transition: opacity 0.3s ease-in-out;
+    transition: opacity 0.8s ease-in-out;
   }
 
   .expanding-card.expanded .description {
@@ -118,46 +118,22 @@ const { title, description, imageSrc, imageAlt } = Astro.props;
   document.addEventListener("DOMContentLoaded", () => {
     const cards = document.querySelectorAll(".expanding-card");
 
-    // Ajustar altura inicial según contenido del título
     cards.forEach((card) => {
       const titleElement = card.querySelector("h2");
       const imageElement = card.querySelector("img");
-
-      // Detectar si el título ocupa más de una línea y ajustar altura
-      function adjustCardHeight() {
-        const titleHeight = titleElement.offsetHeight;
-        const standardTitleHeight = 32; // Altura aproximada de una línea de título
-
-        if (titleHeight > standardTitleHeight) {
-          // Ajustar la altura de la tarjeta según necesidad
-          const extraHeight = titleHeight - standardTitleHeight;
-          card.style.minHeight = `calc(${card.offsetHeight}px + ${extraHeight}px)`;
-        }
-      }
-
-      // Ejecutar después de que las imágenes se carguen
-      if (imageElement.complete) {
-        adjustCardHeight();
-      } else {
-        imageElement.onload = adjustCardHeight;
-      }
     });
 
     cards.forEach((card) => {
-      // Evento para desktop (hover)
       card.addEventListener("mouseenter", () => {
         card.classList.add("expanded");
       });
 
-      // Evento para dispositivos táctiles (tap/touch)
       card.addEventListener("click", () => {
-        // Si ya está expandida, no hacemos nada (para mantenerla expandida)
         if (!card.classList.contains("expanded")) {
           card.classList.add("expanded");
         }
       });
 
-      // Soporte para dispositivos táctiles
       card.addEventListener(
         "touchstart",
         (e) => {
