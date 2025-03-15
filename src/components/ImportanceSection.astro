@@ -41,45 +41,52 @@ const infoCards = [
 ];
 ---
 
-<div class="bg-white pt-25">
-  <div class="text-left">
-    <h1 class="text-4xl md:text-5xl font-bold text-[#0a2463] mb-4 text-left">
-      ¿Por qué es importante medirlos?
-    </h1>
+<section class="relative w-full py-8">
+  <!-- Fondo que se extiende a toda la página -->
+  <div class="absolute inset-0 w-full bg-[rgb(244,246,252)]"></div>
 
-    <p class="text-lg text-gray-800 mb-10 max-w-4xl text-left">
-      La medición de los riesgos psicosociales mediante las baterías diseñadas
-      por el Ministerio de Salud (Resolución 2404 de 2019) es fundamental para:
-    </p>
-  </div>
+  <!-- Contenedor con el tamaño del layout -->
+  <div class="relative max-w-5xl mx-auto px-8 xl:px-0 py-8">
+    <div class="text-left">
+      <h1 class="text-4xl md:text-5xl font-bold text-[#0a2463] mb-4 text-left">
+        ¿Por qué es importante medirlos?
+      </h1>
 
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-    {
-      infoCards
-        .slice(0, 3)
-        .map((card) => (
-          <InfoCard
-            title={card.title}
-            description={card.description}
-            imageSrc={card.imageSrc}
-            imageAlt={card.imageAlt}
-          />
-        ))
-    }
-  </div>
+      <p class="text-lg text-gray-800 mb-10 max-w-4xl text-left">
+        La medición de los riesgos psicosociales mediante las baterías diseñadas
+        por el Ministerio de Salud (Resolución 2404 de 2019) es fundamental
+        para:
+      </p>
+    </div>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-    {
-      infoCards
-        .slice(3)
-        .map((card) => (
-          <InfoCard
-            title={card.title}
-            description={card.description}
-            imageSrc={card.imageSrc}
-            imageAlt={card.imageAlt}
-          />
-        ))
-    }
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+      {
+        infoCards
+          .slice(0, 3)
+          .map((card) => (
+            <InfoCard
+              title={card.title}
+              description={card.description}
+              imageSrc={card.imageSrc}
+              imageAlt={card.imageAlt}
+            />
+          ))
+      }
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {
+        infoCards
+          .slice(3)
+          .map((card) => (
+            <InfoCard
+              title={card.title}
+              description={card.description}
+              imageSrc={card.imageSrc}
+              imageAlt={card.imageAlt}
+            />
+          ))
+      }
+    </div>
   </div>
-</div>
+</section>

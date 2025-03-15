@@ -1,0 +1,196 @@
+---
+import Banner from "./Banner.astro";
+export const prerender = false;
+---
+
+<section class="relative w-full py-8 max-w-7xl mx-auto">
+  <div class="">
+    <div class="relative bg-teal-700 rounded-3xl">
+      <div
+        class="w-full bg-white rounded-3xl transform -translate-x-3 -translate-y-3 shadow-lg p-6 md:p-8"
+      >
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="md:order-1 order-2">
+            <img
+              src="/src/assets/img/Foto.jpg"
+              alt="Foto Fundadora"
+              class="w-full rounded-3xl mb-6"
+            />
+          </div>
+          <div class="md:order-2 order-1">
+            <div class="space-y-4">
+              <h2 class="text-2xl md:text-3xl font-bold text-pantone-281 mb-2">
+                Contáctanos
+              </h2>
+              <p class="text-black">
+                Completa el formulario y nos pondremos en contacto contigo lo
+                antes posible.
+              </p>
+            </div>
+            <form
+              id="contact-form"
+              class="space-y-4"
+              action="/api/send-email"
+              method="POST"
+            >
+              <div class="space-y-2 text-pantone-281">
+                <label for="email" class="block text-teal-800">Nombre</label>
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  placeholder="Tu nombre"
+                  required
+                  class="w-full px-4 py-2 rounded-md bg-teal-50 border border-teal-200 text-pantone-281 focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20"
+                />
+              </div>
+
+              <div class="space-y-2 text-pantone-281">
+                <label for="email" class="block text-teal-800"
+                  >Correo electrónico</label
+                >
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  placeholder="tu@correo.com"
+                  required
+                  class="w-full px-4 py-2 rounded-md bg-teal-50 border border-teal-200 text-pantone-281 focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20"
+                />
+              </div>
+
+              <div class="space-y-2 text-pantone-281">
+                <label for="company" class="block text-teal-800">Empresa</label>
+                <input
+                  id="company"
+                  name="company"
+                  type="text"
+                  placeholder="Nombre de tu empresa"
+                  class="w-full px-4 py-2 rounded-md bg-teal-50 border border-teal-200 text-teal-900 focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20"
+                />
+              </div>
+
+              <div class="space-y-2 text-pantone-281">
+                <label for="message" class="block text-teal-800">Mensaje</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  placeholder="¿En qué podemos ayudarte?"
+                  required
+                  class="w-full px-4 py-2 rounded-md bg-teal-50 border border-teal-200 text-teal-900 focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20 min-h-[120px]"
+                ></textarea>
+              </div>
+
+              <button
+                type="submit"
+                id="submit-button"
+                class="w-full bg-teal-700 text-white hover:bg-teal-600 transition-all duration-300 py-2 px-4 rounded-md font-medium flex items-center justify-center gap-2 shadow-lg shadow-teal-700/20"
+              >
+                <span id="button-text">Enviar mensaje</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-send"
+                >
+                  <path d="m22 2-7 20-4-9-9-4Z"></path>
+                  <path d="M22 2 11 13"></path>
+                </svg>
+                <span
+                  id="spinner"
+                  class="hidden h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"
+                ></span>
+              </button>
+
+              <div
+                id="success-message"
+                class="hidden p-4 bg-green-50 text-green-800 rounded-md border border-green-200"
+              >
+                Gracias por tu mensaje. Nos pondremos en contacto contigo
+                pronto.
+              </div>
+
+              <div
+                id="error-message"
+                class="hidden p-4 bg-red-50 text-red-800 rounded-md border border-red-200"
+              >
+                Hubo un problema al enviar el formulario. Por favor, inténtalo
+                de nuevo.
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Script para manejar el envío del formulario
+  document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("contact-form");
+    const submitButton = document.getElementById("submit-button");
+    const buttonText = document.getElementById("button-text");
+    const spinner = document.getElementById("spinner");
+    const successMessage = document.getElementById("success-message");
+    const errorMessage = document.getElementById("error-message");
+
+    if (form) {
+      form.addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        // Ocultar mensajes previos
+        successMessage.classList.add("hidden");
+        errorMessage.classList.add("hidden");
+
+        // Mostrar estado de carga
+        buttonText.textContent = "Enviando...";
+        spinner.classList.remove("hidden");
+        submitButton.disabled = true;
+
+        try {
+          const formData = new FormData(form);
+          const response = await fetch(form.action, {
+            method: "POST",
+            body: formData,
+            headers: {
+              Accept: "application/json",
+            },
+          });
+
+          const data = await response.json();
+
+          if (response.ok) {
+            // Éxito
+            form.reset();
+            successMessage.classList.remove("hidden");
+          } else {
+            // Error
+            throw new Error(data.error || "Error al enviar el formulario");
+          }
+        } catch (error) {
+          console.error("Error:", error);
+          errorMessage.classList.remove("hidden");
+        } finally {
+          // Restaurar botón
+          buttonText.textContent = "Enviar mensaje";
+          spinner.classList.add("hidden");
+          submitButton.disabled = false;
+        }
+      });
+    }
+  });
+</script>
+
+<style>
+  input:focus,
+  textarea:focus {
+    outline: none;
+  }
+</style>

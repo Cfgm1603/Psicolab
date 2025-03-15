@@ -6,20 +6,16 @@ import ImpactSection from "../components/ImpactSection.astro";
 import ImportanceSection from "../components/ImportanceSection.astro";
 ---
 
-<FullWidthLayout>
-  <!-- Estas son secciones con contenido centrado -->
-  <div class="py-8 max-w-5xl mx-auto px-8 xl:px-0">
+<div class="py-8 max-w-5xl mx-auto px-8 xl:px-0">
+  <FullWidthLayout>
     <HeroSection />
-  </div>
+  </FullWidthLayout>
+</div>
 
-  <div class="py-8 max-w-5xl mx-auto px-8 xl:px-0">
-    <PsychosocialRiskSection />
-  </div>
+<div class="py-8 max-w-5xl mx-auto px-8 xl:px-0">
+  <PsychosocialRiskSection />
+</div>
 
-  <!-- Esta es la sección que necesita extenderse al ancho completo -->
-  <ImpactSection />
+<ImpactSection />
 
-  <div class="py-8 max-w-5xl mx-auto px-8 xl:px-0">
-    <ImportanceSection />
-  </div>
-</FullWidthLayout>
+<ImportanceSection />

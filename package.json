@@ -9,9 +9,11 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@fontsource/poppins": "^5.2.5",
     "@tailwindcss/vite": "^4.0.9",
     "aos": "^2.3.4",
     "astro": "^5.3.1",
+    "mailgun.js": "^12.0.1",
     "tailwindcss": "^4.0.9"
   },
   "devDependencies": {
