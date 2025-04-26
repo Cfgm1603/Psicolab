@@ -5,13 +5,13 @@ import Mailgun from 'mailgun.js';
 
 export const POST: APIRoute = async ({ request }) => {
   try {
-    
+
     const apiKey = import.meta.env.MAILGUN_API_KEY || process.env.MAILGUN_API_KEY;
     if (!apiKey) {
       throw new Error("MAILGUN_API_KEY no está definido en las variables de entorno.");
     }
 
-    
+
     const mailgun = new Mailgun(FormData);
     const mg = mailgun.client({
       username: 'api',
@@ -20,7 +20,7 @@ export const POST: APIRoute = async ({ request }) => {
 
     const DOMAIN = 'paramoprograming.com';
 
-    
+
     const formData = await request.formData();
     const name = formData.get('name')?.toString() || 'Sin nombre';
     const email = formData.get('email')?.toString() || 'Sin correo';
@@ -29,12 +29,12 @@ export const POST: APIRoute = async ({ request }) => {
 
     console.log('Datos del formulario recibidos:', { name, email });
 
-    
+
     const response = await mg.messages.create(
       DOMAIN,
       {
         from: `Contacto ParamoPrograming <postmaster@${DOMAIN}>`,
-        to: ['Juanaparrado19@gmail.com', 'cesarfelipe0316@gmail.com'],
+        to: ['info@psicolab.com.co', 'cesarfelipe0316@gmail.com'],
         subject: `${empresa} quiere contactarte`,
         template: "psicolab",
         "h:X-Mailgun-Variables": JSON.stringify({
@@ -46,7 +46,7 @@ export const POST: APIRoute = async ({ request }) => {
       }
     );
 
-    
+
     return new Response(JSON.stringify({
       success: true,
       data: response
