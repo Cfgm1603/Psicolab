@@ -5,48 +5,55 @@ import Mailgun from 'mailgun.js';
 
 export const POST: APIRoute = async ({ request }) => {
   try {
-    // Debugging - Mostrar la API key que se está usando
-    const apiKey = import.meta.env.MAILGUN_API_KEY || process.env.MAILGUN_API_KEY || 'API_KEY';
-    console.log('API Key (primeros 4 caracteres):', apiKey.substring(0, 4));
     
-    // 1. Inicializa Mailgun con tu clave privada
+    const apiKey = import.meta.env.MAILGUN_API_KEY || process.env.MAILGUN_API_KEY;
+    if (!apiKey) {
+      throw new Error("MAILGUN_API_KEY no está definido en las variables de entorno.");
+    }
+
+    
     const mailgun = new Mailgun(FormData);
     const mg = mailgun.client({
       username: 'api',
-      key: apiKey,
-      // url: 'https://api.eu.mailgun.net/v3'  // Descomenta si tu dominio es EU
+      key: apiKey
     });
-    
-    // Más debugging
-    console.log('Dominio Mailgun:', 'sandboxeabd55435e5b4a419df95dd8f3492e44.mailgun.org');
-    console.log('Correo destino:', 'cesarfelipe0316@gmail.com');
 
-    // 2. Obtén los datos del formulario
+    const DOMAIN = 'paramoprograming.com';
+
+    
     const formData = await request.formData();
     const name = formData.get('name')?.toString() || 'Sin nombre';
     const email = formData.get('email')?.toString() || 'Sin correo';
     const message = formData.get('message')?.toString() || 'Sin mensaje';
-    
+    const empresa = formData.get('company')?.toString() || 'Sin empresa';
+
     console.log('Datos del formulario recibidos:', { name, email });
 
-    // 3. Envía el correo con Mailgun
+    
     const response = await mg.messages.create(
-      'sandboxeabd55435e5b4a419df95dd8f3492e44.mailgun.org',
+      DOMAIN,
       {
-        from: 'Mailgun Sandbox <postmaster@sandboxeabd55435e5b4a419df95dd8f3492e44.mailgun.org>',
-        to: ['cesarfelipe0316@gmail.com'],
-        subject: `Nuevo mensaje de ${name}`,
-        text: `Nombre: ${name}\nCorreo: ${email}\nMensaje: ${message}`
+        from: `Contacto ParamoPrograming <postmaster@${DOMAIN}>`,
+        to: ['Juanaparrado19@gmail.com', 'cesarfelipe0316@gmail.com'],
+        subject: `${empresa} quiere contactarte`,
+        template: "psicolab",
+        "h:X-Mailgun-Variables": JSON.stringify({
+          nombre: name,
+          correo: email,
+          mensaje: message,
+          Empresa: empresa
+        })
       }
     );
 
-    // 4. Retorna una respuesta al navegador
+    
     return new Response(JSON.stringify({
       success: true,
       data: response
     }), { status: 200 });
+
   } catch (error) {
-    console.error('Error completo enviando correo:', error);
+    console.error('Error enviando correo:', error);
     return new Response(JSON.stringify({
       success: false,
       error: String(error)

@@ -1,37 +1,35 @@
 ---
+import { Image } from "astro:assets";
 interface Props {
   title: string;
   description: string;
-  imageSrc: string;
+  imageSrc: any;
   imageAlt: string;
 }
-
 const { title, description, imageSrc, imageAlt } = Astro.props;
 ---
 
 <div class="expanding-card bg-white rounded-3xl overflow-hidden shadow-md">
   <div class="card-content px-4 py-2">
     <div class="px-3 py-2">
-      <h2
-        class="text-xl md:text-2xl font-bold text-[#061d56] line-clamp-2 md:line-clamp-2"
-      >
+      <h2 class="text-xl md:text-2xl font-bold text-[#061d56] line-clamp-2 md:line-clamp-2">
         {title}
       </h2>
     </div>
     <div class="overflow-hidden rounded-3xl">
-      <img
-        src={imageSrc || "/placeholder.svg"}
-        alt={imageAlt}
-        class="w-full h-[120px] md:h-[150px] object-cover"
-      />
+      <div class="relative w-full h-[120px] md:h-[150px] rounded-3xl overflow-hidden">
+        <Image
+          src={imageSrc}
+          alt={imageAlt}
+          class="w-full h-full object-cover rounded-3xl"
+          width={400}
+          height={250}
+          loading="lazy"
+        />
+      </div>
     </div>
     <div class="expand-indicator">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        fill="currentColor"
-        class="w-6 h-6"
-      >
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
         <path
           fill-rule="evenodd"
           d="M12.53 16.28a.75.75 0 01-1.06 0l-6-6a.75.75 0 011.06-1.06L12 14.69l5.47-5.47a.75.75 0 111.06 1.06l-6 6z"
@@ -40,9 +38,7 @@ const { title, description, imageSrc, imageAlt } = Astro.props;
     </div>
     <div class="description-container bg-white">
       <div class="p-1 md:p-2">
-        <p
-          class="text-base md:text-lg text-gray-700 description leading-relaxed"
-        >
+        <p class="text-base md:text-lg text-gray-700 description leading-relaxed">
           {description}
         </p>
       </div>
