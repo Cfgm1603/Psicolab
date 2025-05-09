@@ -9,7 +9,7 @@ export const prerender = false;
       <div class="w-full bg-white rounded-3xl transform -translate-x-3 -translate-y-3 shadow-lg p-6 md:p-8">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div class="md:order-1 order-2">
-            <img src="/src/assets/img/30.webp" alt="Foto Fundadora" class="w-full rounded-3xl mb-6" />
+            <img src="/img/30.webp" alt="Foto Fundadora" class="w-full rounded-3xl mb-6" />
           </div>
           <div class="md:order-2 order-1">
             <div class="space-y-4">
@@ -136,6 +136,7 @@ export const prerender = false;
             method: "POST",
             body: formData,
             headers: {
+              "Access-Control-Allow-Origin": "https://psicolab.com.co", 
               Accept: "application/json",
             },
           });

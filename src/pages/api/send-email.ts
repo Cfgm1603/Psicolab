@@ -6,7 +6,7 @@ import Mailgun from 'mailgun.js';
 export const POST: APIRoute = async ({ request }) => {
   try {
 
-    const apiKey = import.meta.env.MAILGUN_API_KEY || process.env.MAILGUN_API_KEY;
+    const apiKey = import.meta.env.MAILGUN_API_KEY ;
     if (!apiKey) {
       throw new Error("MAILGUN_API_KEY no está definido en las variables de entorno.");
     }
@@ -50,7 +50,10 @@ export const POST: APIRoute = async ({ request }) => {
     return new Response(JSON.stringify({
       success: true,
       data: response
-    }), { status: 200 });
+    }), { status: 200, headers:{"Access-Control-Allow-Origin": "*", // o tu dominio
+      "Access-Control-Allow-Methods": "POST, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type"} 
+    });
 
   } catch (error) {
     console.error('Error enviando correo:', error);
