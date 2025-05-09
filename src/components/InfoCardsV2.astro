@@ -134,8 +134,8 @@ const { title, description, imageSrc, imageAlt } = Astro.props;
         "touchstart",
         (e) => {
           if (window.matchMedia("(pointer: coarse)").matches) {
-            e.preventDefault();
             if (!card.classList.contains("expanded")) {
+              e.preventDefault();
               card.classList.add("expanded");
             }
           }
