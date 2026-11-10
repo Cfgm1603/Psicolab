@@ -34,7 +34,7 @@ export const POST: APIRoute = async ({ request }) => {
       DOMAIN,
       {
         from: `Contacto ParamoPrograming <postmaster@${DOMAIN}>`,
-        to: ['info@psicolab.com.co', 'cesarfelipe0316@gmail.com'],
+        to: [/* 'info@psicolab.com.co', 'cesarfelipe0316@gmail.com' */ 'juanaparrado19@gmail.com'],
         subject: `${empresa} quiere contactarte`,
         template: "psicolab",
         "h:X-Mailgun-Variables": JSON.stringify({
@@ -50,7 +50,8 @@ export const POST: APIRoute = async ({ request }) => {
     return new Response(JSON.stringify({
       success: true,
       data: response
-    }), { status: 200, headers:{"Access-Control-Allow-Origin": "*", // o tu dominio
+    }), { status: 200, headers:{
+      "Access-Control-Allow-Origin": "*", // o tu dominio
       "Access-Control-Allow-Methods": "POST, OPTIONS",
       "Access-Control-Allow-Headers": "Content-Type"} 
     });

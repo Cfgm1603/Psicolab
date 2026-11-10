@@ -1,5 +1,6 @@
 ---
 import Banner from "./Banner.astro";
+
 export const prerender = false;
 ---
 
@@ -110,7 +111,7 @@ export const prerender = false;
 <script>
   // Script para manejar el envío del formulario
   document.addEventListener("DOMContentLoaded", function () {
-    const form = document.getElementById("contact-form");
+    const form = document.getElementById("contact-form") as HTMLFormElement | null;
     const submitButton = document.getElementById("submit-button");
     const buttonText = document.getElementById("button-text");
     const spinner = document.getElementById("spinner");
@@ -122,22 +123,31 @@ export const prerender = false;
         e.preventDefault();
 
         // Ocultar mensajes previos
-        successMessage.classList.add("hidden");
-        errorMessage.classList.add("hidden");
+        if (successMessage) {
+          successMessage.classList.add("hidden");
+        }
+        if (errorMessage) {
+          errorMessage.classList.add("hidden");
+        }
 
         // Mostrar estado de carga
-        buttonText.textContent = "Enviando...";
-        spinner.classList.remove("hidden");
-        submitButton.disabled = true;
+        if (buttonText) {
+          buttonText.textContent = "Enviando...";
+        }
+        if (spinner) {
+          spinner.classList.remove("hidden");
+        }
+        if (submitButton) {
+          (submitButton as HTMLButtonElement).disabled = true;
+        }
 
         try {
           const formData = new FormData(form);
-          const response = await fetch(form.action, {
+          const response = await fetch('http://144.126.210.41:4321/api/send-email', {
             method: "POST",
             body: formData,
             headers: {
-              "Access-Control-Allow-Origin": "https://psicolab.com.co", 
-              Accept: "application/json",
+              "Content-Type": "application/json"
             },
           });
 
@@ -146,19 +156,29 @@ export const prerender = false;
           if (response.ok) {
             // Éxito
             form.reset();
-            successMessage.classList.remove("hidden");
+            if (successMessage) {
+              successMessage.classList.remove("hidden");
+            }
           } else {
             // Error
             throw new Error(data.error || "Error al enviar el formulario");
           }
         } catch (error) {
           console.error("Error:", error);
-          errorMessage.classList.remove("hidden");
+          if (errorMessage) {
+            errorMessage.classList.remove("hidden");
+          }
         } finally {
           // Restaurar botón
-          buttonText.textContent = "Enviar mensaje";
-          spinner.classList.add("hidden");
-          submitButton.disabled = false;
+          if (buttonText) {
+            buttonText.textContent = "Enviar mensaje";
+          }
+          if (spinner) {
+            spinner.classList.add("hidden");
+          }
+          if (submitButton) {
+            (submitButton as HTMLButtonElement).disabled = false;
+          }
         }
       });
     }

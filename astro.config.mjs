@@ -9,6 +9,19 @@ import node from "@astrojs/node";
 export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
+    server: {
+      port: 4321,
+      host: true,
+      cors: {
+        origin: "*",
+        methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+        allowedHeaders: ["Content-Type", "Authorization"],
+      },
+    },
+    ssr: {
+      noExternal: ["@mailgun-js/mailgun-js", "mailgun.js"],
+      
+    },
   },
 
   adapter: node({
